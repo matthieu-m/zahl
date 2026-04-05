@@ -140,6 +140,18 @@ mod add_31_33;
 #[cfg(feature = "add-36")]
 mod add_34_36;
 
+#[cfg(feature = "add-39")]
+mod add_37_39;
+
+#[cfg(feature = "add-42")]
+mod add_40_42;
+
+#[cfg(feature = "add-45")]
+mod add_43_45;
+
+#[cfg(feature = "add-48")]
+mod add_46_48;
+
 #[cfg(feature = "div-3")]
 mod div_1_3;
 
@@ -175,6 +187,18 @@ mod div_31_33;
 
 #[cfg(feature = "div-36")]
 mod div_34_36;
+
+#[cfg(feature = "div-39")]
+mod div_37_39;
+
+#[cfg(feature = "div-42")]
+mod div_40_42;
+
+#[cfg(feature = "div-45")]
+mod div_43_45;
+
+#[cfg(feature = "div-48")]
+mod div_46_48;
 
 #[cfg(feature = "mul-3")]
 mod mul_1_3;
@@ -212,6 +236,18 @@ mod mul_31_33;
 #[cfg(feature = "mul-36")]
 mod mul_34_36;
 
+#[cfg(feature = "mul-39")]
+mod mul_37_39;
+
+#[cfg(feature = "mul-42")]
+mod mul_40_42;
+
+#[cfg(feature = "mul-45")]
+mod mul_43_45;
+
+#[cfg(feature = "mul-48")]
+mod mul_46_48;
+
 #[cfg(feature = "neg-3")]
 mod neg_1_3;
 
@@ -247,6 +283,18 @@ mod neg_31_33;
 
 #[cfg(feature = "neg-36")]
 mod neg_34_36;
+
+#[cfg(feature = "neg-39")]
+mod neg_37_39;
+
+#[cfg(feature = "neg-42")]
+mod neg_40_42;
+
+#[cfg(feature = "neg-45")]
+mod neg_43_45;
+
+#[cfg(feature = "neg-48")]
+mod neg_46_48;
 
 #[cfg(feature = "rem-3")]
 mod rem_1_3;
@@ -284,6 +332,18 @@ mod rem_31_33;
 #[cfg(feature = "rem-36")]
 mod rem_34_36;
 
+#[cfg(feature = "rem-39")]
+mod rem_37_39;
+
+#[cfg(feature = "rem-42")]
+mod rem_40_42;
+
+#[cfg(feature = "rem-45")]
+mod rem_43_45;
+
+#[cfg(feature = "rem-48")]
+mod rem_46_48;
+
 #[cfg(feature = "sub-3")]
 mod sub_1_3;
 
@@ -319,3 +379,15 @@ mod sub_31_33;
 
 #[cfg(feature = "sub-36")]
 mod sub_34_36;
+
+#[cfg(feature = "sub-39")]
+mod sub_37_39;
+
+#[cfg(feature = "sub-42")]
+mod sub_40_42;
+
+#[cfg(feature = "sub-45")]
+mod sub_43_45;
+
+#[cfg(feature = "sub-48")]
+mod sub_46_48;
