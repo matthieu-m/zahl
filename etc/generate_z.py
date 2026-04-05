@@ -87,7 +87,7 @@ def generate_buckets(n):
     return buckets
 
 
-def generate_all(n):
+def generate_operations(n):
     """Generates all expressions of the form {op} a = c and a {op} b = c for a, b and c in [-n, n]"""
 
     for a in range(-n, n+1):
@@ -157,21 +157,19 @@ def print_all(buckets):
         lines = []
 
         for b in buckets:
-            step = b.high - b.low + 1
+            feature = f'{b.name}-{b.high}'
 
-            feature = f'{b.name}-{b.low}-{b.high}'
-
-            deps = f'["{b.name}-{b.low - step}-{b.high - step}"]' if b.low > step else '[]'
+            deps = f'["{b.name}-{b.low - 1}"]' if b.low > 1 else '[]'
 
             lines.append(f'{feature} = {deps}')
 
-        return ['[features]', '', 'default = ["add-4-6", "neg-4-6", "sub-4-6"]', ''] + lines
+        return ['[features]', '', 'default = ["add-6", "neg-6", "sub-6"]', ''] + lines
 
     def format_modules(buckets):
         lines = []
 
         for b in buckets:
-            lines.append(f'#[cfg(feature = "{b.name}-{b.low}-{b.high}")]')
+            lines.append(f'#[cfg(feature = "{b.name}-{b.high}")]')
             lines.append(f'mod {b.name}_{b.low}_{b.high};')
             lines.append('')
 
@@ -210,7 +208,7 @@ if __name__ == "__main__":
 
     buckets = generate_buckets(n)
 
-    operations = generate_all(n)
+    operations = generate_operations(n)
 
     sort_into(operations, buckets)
 
