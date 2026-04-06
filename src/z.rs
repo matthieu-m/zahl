@@ -11,6 +11,12 @@ impl<const N: i32> Z<N> {
     }
 }
 
+impl<const N: i32> From<Z<N>> for i32 {
+    fn from(_: Z<N>) -> Self {
+        N
+    }
+}
+
 //
 //  Arithmetic for Z
 //
