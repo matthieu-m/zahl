@@ -48,6 +48,32 @@ macro_rules! impl_z {
             }
         }
     };
+    ($left:literal max $right:literal = $result:literal) => {
+        impl $crate::Max<$crate::Z<$right>> for $crate::Z<$left> {
+            type Output = $crate::Z<$result>;
+
+            fn max(self, _other: $crate::Z<$right>) -> $crate::Z<$result> {
+                const {
+                    assert!(if $left >= $right { $left } else { $right } == $result);
+                }
+
+                $crate::Z
+            }
+        }
+    };
+    ($left:literal min $right:literal = $result:literal) => {
+        impl $crate::Min<$crate::Z<$right>> for $crate::Z<$left> {
+            type Output = $crate::Z<$result>;
+
+            fn min(self, _other: $crate::Z<$right>) -> $crate::Z<$result> {
+                const {
+                    assert!(if $left <= $right { $left } else { $right } == $result);
+                }
+
+                $crate::Z
+            }
+        }
+    };
     ($left:literal + $right:literal = $result:literal) => {
         impl core::ops::Add<$crate::Z<$right>> for $crate::Z<$left> {
             type Output = $crate::Z<$result>;
@@ -145,6 +171,10 @@ macro_rules! impl_z {
 
 impl_z!(abs 0i32 = 0);
 impl_z!(neg 0i32 = 0);
+
+impl_z!(0i32 max 0i32 = 0);
+impl_z!(0i32 min 0i32 = 0);
+
 impl_z!(0 + 0 = 0);
 impl_z!(0 - 0 = 0);
 
@@ -297,6 +327,102 @@ mod div_43_45;
 
 #[cfg(feature = "div-48")]
 mod div_46_48;
+
+#[cfg(feature = "max-3")]
+mod max_1_3;
+
+#[cfg(feature = "max-6")]
+mod max_4_6;
+
+#[cfg(feature = "max-9")]
+mod max_7_9;
+
+#[cfg(feature = "max-12")]
+mod max_10_12;
+
+#[cfg(feature = "max-15")]
+mod max_13_15;
+
+#[cfg(feature = "max-18")]
+mod max_16_18;
+
+#[cfg(feature = "max-21")]
+mod max_19_21;
+
+#[cfg(feature = "max-24")]
+mod max_22_24;
+
+#[cfg(feature = "max-27")]
+mod max_25_27;
+
+#[cfg(feature = "max-30")]
+mod max_28_30;
+
+#[cfg(feature = "max-33")]
+mod max_31_33;
+
+#[cfg(feature = "max-36")]
+mod max_34_36;
+
+#[cfg(feature = "max-39")]
+mod max_37_39;
+
+#[cfg(feature = "max-42")]
+mod max_40_42;
+
+#[cfg(feature = "max-45")]
+mod max_43_45;
+
+#[cfg(feature = "max-48")]
+mod max_46_48;
+
+#[cfg(feature = "min-3")]
+mod min_1_3;
+
+#[cfg(feature = "min-6")]
+mod min_4_6;
+
+#[cfg(feature = "min-9")]
+mod min_7_9;
+
+#[cfg(feature = "min-12")]
+mod min_10_12;
+
+#[cfg(feature = "min-15")]
+mod min_13_15;
+
+#[cfg(feature = "min-18")]
+mod min_16_18;
+
+#[cfg(feature = "min-21")]
+mod min_19_21;
+
+#[cfg(feature = "min-24")]
+mod min_22_24;
+
+#[cfg(feature = "min-27")]
+mod min_25_27;
+
+#[cfg(feature = "min-30")]
+mod min_28_30;
+
+#[cfg(feature = "min-33")]
+mod min_31_33;
+
+#[cfg(feature = "min-36")]
+mod min_34_36;
+
+#[cfg(feature = "min-39")]
+mod min_37_39;
+
+#[cfg(feature = "min-42")]
+mod min_40_42;
+
+#[cfg(feature = "min-45")]
+mod min_43_45;
+
+#[cfg(feature = "min-48")]
+mod min_46_48;
 
 #[cfg(feature = "mul-3")]
 mod mul_1_3;

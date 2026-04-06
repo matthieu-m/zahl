@@ -8,6 +8,9 @@ from functools import total_ordering
 ABS = 'abs'
 NEG = 'neg'
 
+MAX = 'max'
+MIN = 'min'
+
 ADD = 'add'
 SUB = 'sub'
 
@@ -18,7 +21,7 @@ REM = 'rem'
 POW = 'pow'
 ROOT = 'root'
 
-STEPS = { ABS: 3, ADD: 3, NEG: 3, SUB: 3, MUL: 3, DIV: 3, REM: 3, POW: 3, ROOT: 3 }
+STEPS = { ABS: 3, NEG: 3, MAX: 3, MIN: 3, ADD: 3, SUB: 3, MUL: 3, DIV: 3, REM: 3, POW: 3, ROOT: 3 }
 
 
 class Bucket:
@@ -84,6 +87,9 @@ def generate_buckets(n):
     gen_into(buckets, ABS, n)
     gen_into(buckets, NEG, n)
 
+    gen_into(buckets, MAX, n)
+    gen_into(buckets, MIN, n)
+
     gen_into(buckets, ADD, n)
     gen_into(buckets, SUB, n)
 
@@ -105,6 +111,9 @@ def generate_operations(n):
         yield UnaryOperation(NEG, 'neg', a, -a)
 
         for b in range(-n, n+1):
+            yield BinaryOperation(MAX, a, 'max', b, max(a, b))
+            yield BinaryOperation(MIN, a, 'min', b, min(a, b))
+
             c = a + b
 
             if abs(c) <= n:
