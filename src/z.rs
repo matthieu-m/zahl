@@ -22,6 +22,19 @@ impl<const N: i32> From<Z<N>> for i32 {
 //
 
 macro_rules! impl_z {
+    (abs $i:literal = $result:literal) => {
+        impl $crate::Abs for $crate::Z<$i> {
+            type Output = $crate::Z<$result>;
+
+            fn abs(self) -> $crate::Z<$result> {
+                const {
+                    assert!($i.abs() == $result);
+                }
+
+                $crate::Z
+            }
+        }
+    };
     (neg $i:literal = $result:literal) => {
         impl core::ops::Neg for $crate::Z<$i> {
             type Output = $crate::Z<$result>;
@@ -130,7 +143,8 @@ macro_rules! impl_z {
     };
 }
 
-impl_z!(neg 0 = 0);
+impl_z!(abs 0i32 = 0);
+impl_z!(neg 0i32 = 0);
 impl_z!(0 + 0 = 0);
 impl_z!(0 - 0 = 0);
 
@@ -139,6 +153,54 @@ impl_z!(0 * 0 = 0);
 //
 //  Script generated modules
 //
+
+#[cfg(feature = "abs-3")]
+mod abs_1_3;
+
+#[cfg(feature = "abs-6")]
+mod abs_4_6;
+
+#[cfg(feature = "abs-9")]
+mod abs_7_9;
+
+#[cfg(feature = "abs-12")]
+mod abs_10_12;
+
+#[cfg(feature = "abs-15")]
+mod abs_13_15;
+
+#[cfg(feature = "abs-18")]
+mod abs_16_18;
+
+#[cfg(feature = "abs-21")]
+mod abs_19_21;
+
+#[cfg(feature = "abs-24")]
+mod abs_22_24;
+
+#[cfg(feature = "abs-27")]
+mod abs_25_27;
+
+#[cfg(feature = "abs-30")]
+mod abs_28_30;
+
+#[cfg(feature = "abs-33")]
+mod abs_31_33;
+
+#[cfg(feature = "abs-36")]
+mod abs_34_36;
+
+#[cfg(feature = "abs-39")]
+mod abs_37_39;
+
+#[cfg(feature = "abs-42")]
+mod abs_40_42;
+
+#[cfg(feature = "abs-45")]
+mod abs_43_45;
+
+#[cfg(feature = "abs-48")]
+mod abs_46_48;
 
 #[cfg(feature = "add-3")]
 mod add_1_3;

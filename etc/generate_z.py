@@ -5,8 +5,10 @@
 from collections import defaultdict
 from functools import total_ordering
 
-ADD = 'add'
+ABS = 'abs'
 NEG = 'neg'
+
+ADD = 'add'
 SUB = 'sub'
 
 MUL = 'mul'
@@ -16,7 +18,7 @@ REM = 'rem'
 POW = 'pow'
 ROOT = 'root'
 
-STEPS = { ADD: 3, NEG: 3, SUB: 3, MUL: 3, DIV: 3, REM: 3, POW: 3, ROOT: 3 }
+STEPS = { ABS: 3, ADD: 3, NEG: 3, SUB: 3, MUL: 3, DIV: 3, REM: 3, POW: 3, ROOT: 3 }
 
 
 class Bucket:
@@ -79,8 +81,10 @@ def generate_buckets(n):
 
     buckets = dict()
 
-    gen_into(buckets, ADD, n)
+    gen_into(buckets, ABS, n)
     gen_into(buckets, NEG, n)
+
+    gen_into(buckets, ADD, n)
     gen_into(buckets, SUB, n)
 
     gen_into(buckets, MUL, n)
@@ -97,10 +101,8 @@ def generate_operations(n):
     """Generates all expressions of the form {op} a = c and a {op} b = c for a, b and c in [-n, n]"""
 
     for a in range(-n, n+1):
-        c = -a
-
-        if abs(c) <= n:
-            yield UnaryOperation(NEG, 'neg', a, c)
+        yield UnaryOperation(ABS, 'abs', a, abs(a))
+        yield UnaryOperation(NEG, 'neg', a, -a)
 
         for b in range(-n, n+1):
             c = a + b
