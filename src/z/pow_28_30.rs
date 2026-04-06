@@ -1,0 +1,23 @@
+//! Implementation of pow for numbers in 28..=30.
+
+impl_z!(-30i32 pow 0i32 = 1i32);
+impl_z!(-30i32 pow 1i32 = -30i32);
+impl_z!(-29i32 pow 0i32 = 1i32);
+impl_z!(-29i32 pow 1i32 = -29i32);
+impl_z!(-28i32 pow 0i32 = 1i32);
+impl_z!(-28i32 pow 1i32 = -28i32);
+impl_z!(-1i32 pow 28i32 = 1i32);
+impl_z!(-1i32 pow 29i32 = -1i32);
+impl_z!(-1i32 pow 30i32 = 1i32);
+impl_z!(0i32 pow 28i32 = 0i32);
+impl_z!(0i32 pow 29i32 = 0i32);
+impl_z!(0i32 pow 30i32 = 0i32);
+impl_z!(1i32 pow 28i32 = 1i32);
+impl_z!(1i32 pow 29i32 = 1i32);
+impl_z!(1i32 pow 30i32 = 1i32);
+impl_z!(28i32 pow 0i32 = 1i32);
+impl_z!(28i32 pow 1i32 = 28i32);
+impl_z!(29i32 pow 0i32 = 1i32);
+impl_z!(29i32 pow 1i32 = 29i32);
+impl_z!(30i32 pow 0i32 = 1i32);
+impl_z!(30i32 pow 1i32 = 30i32);

@@ -11,6 +11,10 @@ impl<const N: i32> Z<N> {
     }
 }
 
+//
+//  Arithmetic for Z
+//
+
 macro_rules! impl_z {
     (neg $i:literal = $result:literal) => {
         impl core::ops::Neg for $crate::Z<$i> {
@@ -92,11 +96,37 @@ macro_rules! impl_z {
             }
         }
     };
+    ($left:literal pow $right:literal = $result:literal) => {
+        impl $crate::Pow<$crate::Z<$right>> for $crate::Z<$left> {
+            type Output = $crate::Z<$result>;
+
+            fn pow(self, _other: $crate::Z<$right>) -> $crate::Z<$result> {
+                const {
+                    assert!($left.pow($right as u32) == $right);
+                }
+
+                $crate::Z
+            }
+        }
+    };
+    ($left:literal root $right:literal = $result:literal) => {
+        impl $crate::Root<$crate::Z<$right>> for $crate::Z<$left> {
+            type Output = $crate::Z<$result>;
+
+            fn root(self, _other: $crate::Z<$right>) -> $crate::Z<$result> {
+                const {
+                    assert!($result.pow($right as u32) == $left);
+                }
+
+                $crate::Z
+            }
+        }
+    };
 }
 
+impl_z!(neg 0 = 0);
 impl_z!(0 + 0 = 0);
 impl_z!(0 - 0 = 0);
-impl_z!(neg 0 = 0);
 
 impl_z!(0 * 0 = 0);
 
@@ -296,6 +326,54 @@ mod neg_43_45;
 #[cfg(feature = "neg-48")]
 mod neg_46_48;
 
+#[cfg(feature = "pow-3")]
+mod pow_1_3;
+
+#[cfg(feature = "pow-6")]
+mod pow_4_6;
+
+#[cfg(feature = "pow-9")]
+mod pow_7_9;
+
+#[cfg(feature = "pow-12")]
+mod pow_10_12;
+
+#[cfg(feature = "pow-15")]
+mod pow_13_15;
+
+#[cfg(feature = "pow-18")]
+mod pow_16_18;
+
+#[cfg(feature = "pow-21")]
+mod pow_19_21;
+
+#[cfg(feature = "pow-24")]
+mod pow_22_24;
+
+#[cfg(feature = "pow-27")]
+mod pow_25_27;
+
+#[cfg(feature = "pow-30")]
+mod pow_28_30;
+
+#[cfg(feature = "pow-33")]
+mod pow_31_33;
+
+#[cfg(feature = "pow-36")]
+mod pow_34_36;
+
+#[cfg(feature = "pow-39")]
+mod pow_37_39;
+
+#[cfg(feature = "pow-42")]
+mod pow_40_42;
+
+#[cfg(feature = "pow-45")]
+mod pow_43_45;
+
+#[cfg(feature = "pow-48")]
+mod pow_46_48;
+
 #[cfg(feature = "rem-3")]
 mod rem_1_3;
 
@@ -343,6 +421,54 @@ mod rem_43_45;
 
 #[cfg(feature = "rem-48")]
 mod rem_46_48;
+
+#[cfg(feature = "root-3")]
+mod root_1_3;
+
+#[cfg(feature = "root-6")]
+mod root_4_6;
+
+#[cfg(feature = "root-9")]
+mod root_7_9;
+
+#[cfg(feature = "root-12")]
+mod root_10_12;
+
+#[cfg(feature = "root-15")]
+mod root_13_15;
+
+#[cfg(feature = "root-18")]
+mod root_16_18;
+
+#[cfg(feature = "root-21")]
+mod root_19_21;
+
+#[cfg(feature = "root-24")]
+mod root_22_24;
+
+#[cfg(feature = "root-27")]
+mod root_25_27;
+
+#[cfg(feature = "root-30")]
+mod root_28_30;
+
+#[cfg(feature = "root-33")]
+mod root_31_33;
+
+#[cfg(feature = "root-36")]
+mod root_34_36;
+
+#[cfg(feature = "root-39")]
+mod root_37_39;
+
+#[cfg(feature = "root-42")]
+mod root_40_42;
+
+#[cfg(feature = "root-45")]
+mod root_43_45;
+
+#[cfg(feature = "root-48")]
+mod root_46_48;
 
 #[cfg(feature = "sub-3")]
 mod sub_1_3;

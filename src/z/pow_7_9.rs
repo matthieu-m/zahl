@@ -1,0 +1,27 @@
+//! Implementation of pow for numbers in 7..=9.
+
+impl_z!(-9i32 pow 0i32 = 1i32);
+impl_z!(-9i32 pow 1i32 = -9i32);
+impl_z!(-8i32 pow 0i32 = 1i32);
+impl_z!(-8i32 pow 1i32 = -8i32);
+impl_z!(-7i32 pow 0i32 = 1i32);
+impl_z!(-7i32 pow 1i32 = -7i32);
+impl_z!(-3i32 pow 2i32 = 9i32);
+impl_z!(-2i32 pow 3i32 = -8i32);
+impl_z!(-1i32 pow 7i32 = -1i32);
+impl_z!(-1i32 pow 8i32 = 1i32);
+impl_z!(-1i32 pow 9i32 = -1i32);
+impl_z!(0i32 pow 7i32 = 0i32);
+impl_z!(0i32 pow 8i32 = 0i32);
+impl_z!(0i32 pow 9i32 = 0i32);
+impl_z!(1i32 pow 7i32 = 1i32);
+impl_z!(1i32 pow 8i32 = 1i32);
+impl_z!(1i32 pow 9i32 = 1i32);
+impl_z!(2i32 pow 3i32 = 8i32);
+impl_z!(3i32 pow 2i32 = 9i32);
+impl_z!(7i32 pow 0i32 = 1i32);
+impl_z!(7i32 pow 1i32 = 7i32);
+impl_z!(8i32 pow 0i32 = 1i32);
+impl_z!(8i32 pow 1i32 = 8i32);
+impl_z!(9i32 pow 0i32 = 1i32);
+impl_z!(9i32 pow 1i32 = 9i32);

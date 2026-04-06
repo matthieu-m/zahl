@@ -1,0 +1,25 @@
+//! Implementation of pow for numbers in 34..=36.
+
+impl_z!(-36i32 pow 0i32 = 1i32);
+impl_z!(-36i32 pow 1i32 = -36i32);
+impl_z!(-35i32 pow 0i32 = 1i32);
+impl_z!(-35i32 pow 1i32 = -35i32);
+impl_z!(-34i32 pow 0i32 = 1i32);
+impl_z!(-34i32 pow 1i32 = -34i32);
+impl_z!(-6i32 pow 2i32 = 36i32);
+impl_z!(-1i32 pow 34i32 = 1i32);
+impl_z!(-1i32 pow 35i32 = -1i32);
+impl_z!(-1i32 pow 36i32 = 1i32);
+impl_z!(0i32 pow 34i32 = 0i32);
+impl_z!(0i32 pow 35i32 = 0i32);
+impl_z!(0i32 pow 36i32 = 0i32);
+impl_z!(1i32 pow 34i32 = 1i32);
+impl_z!(1i32 pow 35i32 = 1i32);
+impl_z!(1i32 pow 36i32 = 1i32);
+impl_z!(6i32 pow 2i32 = 36i32);
+impl_z!(34i32 pow 0i32 = 1i32);
+impl_z!(34i32 pow 1i32 = 34i32);
+impl_z!(35i32 pow 0i32 = 1i32);
+impl_z!(35i32 pow 1i32 = 35i32);
+impl_z!(36i32 pow 0i32 = 1i32);
+impl_z!(36i32 pow 1i32 = 36i32);

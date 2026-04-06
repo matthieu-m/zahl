@@ -1,0 +1,23 @@
+//! Implementation of pow for numbers in 22..=24.
+
+impl_z!(-24i32 pow 0i32 = 1i32);
+impl_z!(-24i32 pow 1i32 = -24i32);
+impl_z!(-23i32 pow 0i32 = 1i32);
+impl_z!(-23i32 pow 1i32 = -23i32);
+impl_z!(-22i32 pow 0i32 = 1i32);
+impl_z!(-22i32 pow 1i32 = -22i32);
+impl_z!(-1i32 pow 22i32 = 1i32);
+impl_z!(-1i32 pow 23i32 = -1i32);
+impl_z!(-1i32 pow 24i32 = 1i32);
+impl_z!(0i32 pow 22i32 = 0i32);
+impl_z!(0i32 pow 23i32 = 0i32);
+impl_z!(0i32 pow 24i32 = 0i32);
+impl_z!(1i32 pow 22i32 = 1i32);
+impl_z!(1i32 pow 23i32 = 1i32);
+impl_z!(1i32 pow 24i32 = 1i32);
+impl_z!(22i32 pow 0i32 = 1i32);
+impl_z!(22i32 pow 1i32 = 22i32);
+impl_z!(23i32 pow 0i32 = 1i32);
+impl_z!(23i32 pow 1i32 = 23i32);
+impl_z!(24i32 pow 0i32 = 1i32);
+impl_z!(24i32 pow 1i32 = 24i32);

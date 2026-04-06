@@ -1,0 +1,23 @@
+//! Implementation of pow for numbers in 43..=45.
+
+impl_z!(-45i32 pow 0i32 = 1i32);
+impl_z!(-45i32 pow 1i32 = -45i32);
+impl_z!(-44i32 pow 0i32 = 1i32);
+impl_z!(-44i32 pow 1i32 = -44i32);
+impl_z!(-43i32 pow 0i32 = 1i32);
+impl_z!(-43i32 pow 1i32 = -43i32);
+impl_z!(-1i32 pow 43i32 = -1i32);
+impl_z!(-1i32 pow 44i32 = 1i32);
+impl_z!(-1i32 pow 45i32 = -1i32);
+impl_z!(0i32 pow 43i32 = 0i32);
+impl_z!(0i32 pow 44i32 = 0i32);
+impl_z!(0i32 pow 45i32 = 0i32);
+impl_z!(1i32 pow 43i32 = 1i32);
+impl_z!(1i32 pow 44i32 = 1i32);
+impl_z!(1i32 pow 45i32 = 1i32);
+impl_z!(43i32 pow 0i32 = 1i32);
+impl_z!(43i32 pow 1i32 = 43i32);
+impl_z!(44i32 pow 0i32 = 1i32);
+impl_z!(44i32 pow 1i32 = 44i32);
+impl_z!(45i32 pow 0i32 = 1i32);
+impl_z!(45i32 pow 1i32 = 45i32);

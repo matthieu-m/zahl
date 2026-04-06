@@ -1,0 +1,27 @@
+//! Implementation of pow for numbers in 16..=18.
+
+impl_z!(-18i32 pow 0i32 = 1i32);
+impl_z!(-18i32 pow 1i32 = -18i32);
+impl_z!(-17i32 pow 0i32 = 1i32);
+impl_z!(-17i32 pow 1i32 = -17i32);
+impl_z!(-16i32 pow 0i32 = 1i32);
+impl_z!(-16i32 pow 1i32 = -16i32);
+impl_z!(-4i32 pow 2i32 = 16i32);
+impl_z!(-2i32 pow 4i32 = 16i32);
+impl_z!(-1i32 pow 16i32 = 1i32);
+impl_z!(-1i32 pow 17i32 = -1i32);
+impl_z!(-1i32 pow 18i32 = 1i32);
+impl_z!(0i32 pow 16i32 = 0i32);
+impl_z!(0i32 pow 17i32 = 0i32);
+impl_z!(0i32 pow 18i32 = 0i32);
+impl_z!(1i32 pow 16i32 = 1i32);
+impl_z!(1i32 pow 17i32 = 1i32);
+impl_z!(1i32 pow 18i32 = 1i32);
+impl_z!(2i32 pow 4i32 = 16i32);
+impl_z!(4i32 pow 2i32 = 16i32);
+impl_z!(16i32 pow 0i32 = 1i32);
+impl_z!(16i32 pow 1i32 = 16i32);
+impl_z!(17i32 pow 0i32 = 1i32);
+impl_z!(17i32 pow 1i32 = 17i32);
+impl_z!(18i32 pow 0i32 = 1i32);
+impl_z!(18i32 pow 1i32 = 18i32);

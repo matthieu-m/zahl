@@ -13,7 +13,10 @@ MUL = 'mul'
 DIV = 'div'
 REM = 'rem'
 
-STEPS = { ADD: 3, NEG: 3, SUB: 3, MUL: 3, DIV: 3, REM: 3 }
+POW = 'pow'
+ROOT = 'root'
+
+STEPS = { ADD: 3, NEG: 3, SUB: 3, MUL: 3, DIV: 3, REM: 3, POW: 3, ROOT: 3 }
 
 
 class Bucket:
@@ -37,7 +40,7 @@ class BinaryOperation:
         return max(abs(self.a), abs(self.b), abs(self.c))
 
     def print(self):
-        return f"impl_z!({self.a} {self.op} {self.b} = {self.c});"
+        return f"impl_z!({self.a}i32 {self.op} {self.b}i32 = {self.c}i32);"
 
     def __lt__(self, other):
         return (self.a, self.b, self.op, self.c) < (other.a, other.b, other.op, other.c)
@@ -55,7 +58,7 @@ class UnaryOperation:
         return max(abs(self.x), abs(self.c))
 
     def print(self):
-        return f'impl_z!({self.op} {self.x} = {self.c});'
+        return f'impl_z!({self.op} {self.x}i32 = {self.c}i32);'
 
     def __lt__(self, other):
         return (self.x, self.op, self.c) < (other.x, other.op, other.c)
@@ -83,6 +86,9 @@ def generate_buckets(n):
     gen_into(buckets, MUL, n)
     gen_into(buckets, DIV, n)
     gen_into(buckets, REM, n)
+
+    gen_into(buckets, POW, n)
+    gen_into(buckets, ROOT, n)
 
     return buckets
 
@@ -112,21 +118,28 @@ def generate_operations(n):
             if abs(c) <= n:
                 yield BinaryOperation(MUL, a, '*', b, c)
 
-            if b == 0:
-                continue
+            if b > 0:
+                c = a // b
 
-            c = a // b
+                if a == b * c and abs(c) <= n:
+                    yield BinaryOperation(DIV, a, '/', b, c)
 
-            if a == b * c and abs(c) <= n:
-                yield BinaryOperation(DIV, a, '/', b, c)
+            if abs(b) > 1:
+                c = a % b
 
-            if abs(b) <= 1:
-                continue
+                if abs(c) <= n:
+                    yield BinaryOperation(REM, a, '%', b, c)
 
-            c = a % b
+            if b >= 0:
+                c = a ** b
 
-            if abs(c) <= n:
-                yield BinaryOperation(REM, a, '%', b, c)
+                if abs(c) <= n:
+                    yield BinaryOperation(POW, a, 'pow', b, c)
+
+                #   The 0-th root of a number is not defined.
+                #   There are two distinct n-th root of a number when n is even, causing conflicts.
+                if abs(c) <= n and b > 0 and (a > 0 or b % 2 == 1):
+                    yield BinaryOperation(ROOT, c, 'root', b, a)
 
 
 def sort_into(operations, buckets):

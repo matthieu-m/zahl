@@ -1,0 +1,23 @@
+//! Implementation of pow for numbers in 13..=15.
+
+impl_z!(-15i32 pow 0i32 = 1i32);
+impl_z!(-15i32 pow 1i32 = -15i32);
+impl_z!(-14i32 pow 0i32 = 1i32);
+impl_z!(-14i32 pow 1i32 = -14i32);
+impl_z!(-13i32 pow 0i32 = 1i32);
+impl_z!(-13i32 pow 1i32 = -13i32);
+impl_z!(-1i32 pow 13i32 = -1i32);
+impl_z!(-1i32 pow 14i32 = 1i32);
+impl_z!(-1i32 pow 15i32 = -1i32);
+impl_z!(0i32 pow 13i32 = 0i32);
+impl_z!(0i32 pow 14i32 = 0i32);
+impl_z!(0i32 pow 15i32 = 0i32);
+impl_z!(1i32 pow 13i32 = 1i32);
+impl_z!(1i32 pow 14i32 = 1i32);
+impl_z!(1i32 pow 15i32 = 1i32);
+impl_z!(13i32 pow 0i32 = 1i32);
+impl_z!(13i32 pow 1i32 = 13i32);
+impl_z!(14i32 pow 0i32 = 1i32);
+impl_z!(14i32 pow 1i32 = 14i32);
+impl_z!(15i32 pow 0i32 = 1i32);
+impl_z!(15i32 pow 1i32 = 15i32);
