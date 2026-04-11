@@ -159,13 +159,13 @@ def generate_operations(n):
             if abs(c) <= n:
                 yield BinaryOperation(MUL, a, '*', b, c)
 
-            if b > 0:
+            if abs(b) > 0:
                 c = a // b
 
                 if a == b * c and abs(c) <= n:
                     yield BinaryOperation(DIV, a, '/', b, c)
 
-            if abs(b) > 1:
+            if abs(b) > 0:
                 c = a % b
 
                 if abs(c) <= n:

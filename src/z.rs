@@ -174,6 +174,8 @@ macro_rules! impl_z {
             type Output = $crate::Z<$result>;
 
             fn rem(self, _other: $crate::Z<$right>) -> $crate::Z<$result> {
+                #![allow(clippy::modulo_one)]
+
                 const {
                     assert!($left % $right == $result);
                 }
