@@ -1,5 +1,7 @@
 //! The core type-level integer type: Z.
 
+use crate::{DivOr, RootOr};
+
 /// Type-level integer.
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct Z<const N: i32>;
@@ -22,6 +24,41 @@ impl<const N: i32> From<Z<N>> for i32 {
 //
 
 macro_rules! impl_z {
+    //
+    //  Fallback operations
+    //
+    (divor $i:literal) => {
+        impl<F, const N: i32> $crate::DivOr<$crate::Z<$i>, F> for $crate::Z<N>
+        where
+            Self: core::ops::Div<$crate::Z<$i>>,
+        {
+            type Output = <Self as core::ops::Div<$crate::Z<$i>>>::Output;
+
+            fn div_or(self, other: $crate::Z<$i>, _fallback: F) -> Self::Output {
+                use core::ops::Div;
+
+                self.div(other)
+            }
+        }
+    };
+    (rootor $i:literal) => {
+        impl<F, const N: i32> $crate::RootOr<$crate::Z<$i>, F> for $crate::Z<N>
+        where
+            Self: $crate::Root<$crate::Z<$i>>,
+        {
+            type Output = <Self as $crate::Root<$crate::Z<$i>>>::Output;
+
+            fn root_or(self, other: $crate::Z<$i>, _fallback: F) -> Self::Output {
+                use $crate::Root;
+
+                self.root(other)
+            }
+        }
+    };
+
+    //
+    //  Unary operations.
+    //
     (abs $i:literal = $result:literal) => {
         impl $crate::Abs for $crate::Z<$i> {
             type Output = $crate::Z<$result>;
@@ -48,6 +85,10 @@ macro_rules! impl_z {
             }
         }
     };
+
+    //
+    //  Binary operations
+    //
     ($left:literal max $right:literal = $result:literal) => {
         impl $crate::Max<$crate::Z<$right>> for $crate::Z<$left> {
             type Output = $crate::Z<$result>;
@@ -179,6 +220,22 @@ impl_z!(0 + 0 = 0);
 impl_z!(0 - 0 = 0);
 
 impl_z!(0 * 0 = 0);
+
+impl<F, const N: i32> DivOr<Z<0>, F> for Z<N> {
+    type Output = F;
+
+    fn div_or(self, _other: Z<0>, fallback: F) -> Self::Output {
+        fallback
+    }
+}
+
+impl<F, const N: i32> RootOr<Z<0>, F> for Z<N> {
+    type Output = F;
+
+    fn root_or(self, _other: Z<0>, fallback: F) -> Self::Output {
+        fallback
+    }
+}
 
 //
 //  Script generated modules
@@ -327,6 +384,54 @@ mod div_43_45;
 
 #[cfg(feature = "div-48")]
 mod div_46_48;
+
+#[cfg(feature = "div-or-3")]
+mod div_or_1_3;
+
+#[cfg(feature = "div-or-6")]
+mod div_or_4_6;
+
+#[cfg(feature = "div-or-9")]
+mod div_or_7_9;
+
+#[cfg(feature = "div-or-12")]
+mod div_or_10_12;
+
+#[cfg(feature = "div-or-15")]
+mod div_or_13_15;
+
+#[cfg(feature = "div-or-18")]
+mod div_or_16_18;
+
+#[cfg(feature = "div-or-21")]
+mod div_or_19_21;
+
+#[cfg(feature = "div-or-24")]
+mod div_or_22_24;
+
+#[cfg(feature = "div-or-27")]
+mod div_or_25_27;
+
+#[cfg(feature = "div-or-30")]
+mod div_or_28_30;
+
+#[cfg(feature = "div-or-33")]
+mod div_or_31_33;
+
+#[cfg(feature = "div-or-36")]
+mod div_or_34_36;
+
+#[cfg(feature = "div-or-39")]
+mod div_or_37_39;
+
+#[cfg(feature = "div-or-42")]
+mod div_or_40_42;
+
+#[cfg(feature = "div-or-45")]
+mod div_or_43_45;
+
+#[cfg(feature = "div-or-48")]
+mod div_or_46_48;
 
 #[cfg(feature = "max-3")]
 mod max_1_3;
@@ -663,6 +768,54 @@ mod root_43_45;
 
 #[cfg(feature = "root-48")]
 mod root_46_48;
+
+#[cfg(feature = "root-or-3")]
+mod root_or_1_3;
+
+#[cfg(feature = "root-or-6")]
+mod root_or_4_6;
+
+#[cfg(feature = "root-or-9")]
+mod root_or_7_9;
+
+#[cfg(feature = "root-or-12")]
+mod root_or_10_12;
+
+#[cfg(feature = "root-or-15")]
+mod root_or_13_15;
+
+#[cfg(feature = "root-or-18")]
+mod root_or_16_18;
+
+#[cfg(feature = "root-or-21")]
+mod root_or_19_21;
+
+#[cfg(feature = "root-or-24")]
+mod root_or_22_24;
+
+#[cfg(feature = "root-or-27")]
+mod root_or_25_27;
+
+#[cfg(feature = "root-or-30")]
+mod root_or_28_30;
+
+#[cfg(feature = "root-or-33")]
+mod root_or_31_33;
+
+#[cfg(feature = "root-or-36")]
+mod root_or_34_36;
+
+#[cfg(feature = "root-or-39")]
+mod root_or_37_39;
+
+#[cfg(feature = "root-or-42")]
+mod root_or_40_42;
+
+#[cfg(feature = "root-or-45")]
+mod root_or_43_45;
+
+#[cfg(feature = "root-or-48")]
+mod root_or_46_48;
 
 #[cfg(feature = "sub-3")]
 mod sub_1_3;

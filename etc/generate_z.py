@@ -16,12 +16,19 @@ SUB = 'sub'
 
 MUL = 'mul'
 DIV = 'div'
+DIV_OR = 'div-or'
 REM = 'rem'
 
 POW = 'pow'
 ROOT = 'root'
+ROOT_OR = 'root-or'
 
-STEPS = { ABS: 3, NEG: 3, MAX: 3, MIN: 3, ADD: 3, SUB: 3, MUL: 3, DIV: 3, REM: 3, POW: 3, ROOT: 3 }
+STEPS = {
+    ABS: 3, NEG: 3, MAX: 3, MIN: 3,
+    ADD: 3, SUB: 3,
+    MUL: 3, DIV: 3, DIV_OR: 3, REM: 3,
+    POW: 3, ROOT: 3, ROOT_OR: 3
+}
 
 
 class Bucket:
@@ -49,6 +56,23 @@ class BinaryOperation:
 
     def __lt__(self, other):
         return (self.a, self.b, self.op, self.c) < (other.a, other.b, other.op, other.c)
+
+
+@total_ordering
+class GenericOperation:
+    def __init__(self, name, op, x):
+        self.name = name
+        self.x = x
+        self.op = op
+
+    def magnitude(self):
+        return abs(self.x)
+
+    def print(self):
+        return f'impl_z!({self.op} {self.x}i32);'
+
+    def __lt__(self, other):
+        return (self.x, self.op) < (other.x, other.op)
 
 
 @total_ordering
@@ -95,10 +119,12 @@ def generate_buckets(n):
 
     gen_into(buckets, MUL, n)
     gen_into(buckets, DIV, n)
+    gen_into(buckets, DIV_OR, n)
     gen_into(buckets, REM, n)
 
     gen_into(buckets, POW, n)
     gen_into(buckets, ROOT, n)
+    gen_into(buckets, ROOT_OR, n)
 
     return buckets
 
@@ -107,6 +133,10 @@ def generate_operations(n):
     """Generates all expressions of the form {op} a = c and a {op} b = c for a, b and c in [-n, n]"""
 
     for a in range(-n, n+1):
+        if abs(a) > 0:
+            yield GenericOperation(DIV_OR, 'divor', a)
+            yield GenericOperation(ROOT_OR, 'rootor', a)
+
         yield UnaryOperation(ABS, 'abs', a, abs(a))
         yield UnaryOperation(NEG, 'neg', a, -a)
 
@@ -177,13 +207,21 @@ def sort_into(operations, buckets):
 def print_all(buckets):
     """Prints it all"""
 
+    def format_module_name(b):
+        return f'{b.name}_{b.low}_{b.high}'.replace('-', '_')
+
     def format_features(buckets):
         lines = []
 
         for b in buckets:
             feature = f'{b.name}-{b.high}'
 
-            deps = f'["{b.name}-{b.low - 1}"]' if b.low > 1 else '[]'
+            if b.low <= 1:
+                deps = '[]'
+            elif not b.name.endswith('-or'):
+                deps = f'["{b.name}-{b.low - 1}"]'
+            else:
+                deps = f'["{b.name}-{b.low - 1}", "{b.name[:-3]}-{b.high}"]'
 
             lines.append(f'{feature} = {deps}')
 
@@ -194,7 +232,7 @@ def print_all(buckets):
 
         for b in buckets:
             lines.append(f'#[cfg(feature = "{b.name}-{b.high}")]')
-            lines.append(f'mod {b.name}_{b.low}_{b.high};')
+            lines.append(f'mod {format_module_name(b)};')
             lines.append('')
 
         return lines
@@ -218,7 +256,7 @@ def print_all(buckets):
     print_to('generated/z.rs', format_modules(sorted_buckets))
 
     for b in sorted_buckets:
-        print_to(f'src/z/{b.name}_{b.low}_{b.high}.rs', format_operations(b.operations))
+        print_to(f'src/z/{format_module_name(b)}.rs', format_operations(b.operations))
 
 
 #
